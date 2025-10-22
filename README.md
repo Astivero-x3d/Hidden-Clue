@@ -62,7 +62,7 @@ Hidden Clue es una pagina web que permite a los usuarios reservar salas.
   ### .env → Variables de entorno (credenciales de la base de datos y Gmail).
   ### composer.json y composer.lock → Gestión de dependencias de Composer.
   ### Páginas principales del proyecto:
-  ### contacto.php, faq.php, index.php, login.php, perfil.php, registro.php, reserva_exitosa.php, reservar.php, ResumenDeReserva.php, salas.php.
+  #### contacto.php, faq.php, index.php, login.php, perfil.php, registro.php, reserva_exitosa.php, reservar.php, ResumenDeReserva.php, salas.php.
 
 ### Autor
 Ismael Astillero García Muñoz
