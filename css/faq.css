@@ -1,0 +1,368 @@
+/* 
+=====================================================================
+Archivo: faq.css
+Descripción: Estilos generales y animaciones para la página de 
+            Preguntas Frecuentes (FAQ) de HiddenClue.
+Contiene: estilos base, diseño de tarjetas FAQ, menú responsive,
+            partículas animadas y efectos visuales.
+===================================================================== */
+
+/* ---------------------------------------------------
+    RESETEO GENERAL
+   --------------------------------------------------- */
+/* Quita márgenes y rellenos por defecto y define el modelo de caja */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------------------------------------------------
+    VARIABLES GLOBALES
+   --------------------------------------------------- */
+
+:root {
+    /* Colores personalizados reutilizables en todo el archivo */
+    --primary-color: #1a1a2e;   /* Fondo principal */
+    --secondary-color: #27ae60; /* Verde para acentos e interacciones */
+    --accent-color: #e74c3c;    /* Rojo para destacar elementos */
+    --text-light: #ecf0f1;      /* Texto claro */
+    --text-dark: #2c3e50;       /* Texto oscuro */
+}
+
+
+/* ---------------------------------------------------
+    ESTILO GLOBAL DEL BODY
+   --------------------------------------------------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f0f;
+    color: var(--text-light);
+    overflow-x: hidden; /* Evita el scroll horizontal */
+    line-height: 1.6;
+}
+
+/* ---------------------------------------------------
+    ANIMACIÓN DE PARTÍCULAS
+   --------------------------------------------------- */
+/* Las partículas se mueven flotando hacia arriba y se desvanecen */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Evita que el body se desplace cuando el menú móvil está abierto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* --------------------- */
+/*      HEADER           */
+/* --------------------- */
+header {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px); /* Difuminado tipo cristal */
+    padding: 1rem 5%;
+    position: fixed; /* Siempre visible al hacer scroll */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo principal del header */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-decoration: none;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+}
+
+/* Enlaces del menú (versión escritorio) */
+.header-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
+}
+
+/* Estilo básico de cada enlace */
+.header-links li a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+/* Cambio de color al pasar el ratón */
+.header-links li a:hover {
+    color: var(--secondary-color);
+}
+
+/* Línea animada que aparece debajo del enlace activo o al hacer hover */
+.header-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.header-links li a:hover::after,
+.header-links li a.active::after {
+    width: 100%;
+}
+
+/* Botón hamburguesa (solo visible en móvil) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+/* --------------------- */
+/*   CONTENIDO PRINCIPAL */
+/* --------------------- */
+main {
+    min-height: 100vh;
+    padding-top: 80px; /* Espacio para no tapar el header fijo */
+}
+
+/* Contenedor de todas las preguntas */
+.contenedor-preguntas {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 2rem;
+}
+
+/* Cada tarjeta de pregunta */
+.lapregunta-card {
+    background: var(--primary-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(39, 174, 96, 0.3);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Efecto de elevación al pasar el ratón */
+.lapregunta-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+    border-color: var(--secondary-color);
+}
+
+/* Estilo del título (pregunta) */
+.lapregunta-card h2 {
+    color: var(--text-light);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 1.5rem;
+    margin: 0;
+    cursor: pointer;
+    background: rgba(26, 26, 46, 0.8);
+    transition: background 0.3s ease;
+}
+
+/* Cambio de color al pasar el ratón sobre la pregunta */
+.lapregunta-card h2:hover {
+    background: rgba(39, 174, 96, 0.1);
+}
+
+
+/* Contenedor de la respuesta (inicialmente oculta) */
+.larespuesta-card {
+    padding: 0 1.5rem;
+    max-height: 0; /* Oculta el contenido */
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Estado visible de la respuesta (cuando tiene clase .active) */
+.larespuesta-card.active {
+    padding: 1.5rem;
+    max-height: 500px; /* Se muestra con animación */
+}
+
+/* Texto dentro de la respuesta */
+.larespuesta-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --------------------- */
+/*        FOOTER         */
+/* --------------------- */
+footer {
+    background: var(--primary-color);
+    padding: 2rem 5%;
+    text-align: center;
+    border-top: 2px solid var(--secondary-color);
+    margin-top: 2rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Texto del footer */
+footer p {
+    margin: 0.5rem 0;
+    color: var(--text-light);
+}
+
+/* Enlaces del footer */
+.footer-links {
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: #eee;
+    text-decoration: none;
+    margin: 0 0.8rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Cambio de color al pasar el ratón */
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Frase final decorativa */
+.footer-quote {
+    font-style: italic;
+    opacity: 0.8;
+    margin-top: 1rem;
+}
+
+/* --------------------- */
+/*      RESPONSIVE       */
+/* --------------------- */
+
+/* Ajustes para tablets y móviles */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0.5rem;
+    }
+
+    /* Muestra el botón hamburguesa y oculta el menú principal */
+    .menu-toggle {
+        display: block;
+        z-index: 1001;
+    }
+
+    /* Menú lateral desplegable */
+    .header-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Fuera de pantalla por defecto */
+        width: 280px;
+        height: 100vh;
+        background: rgba(26, 26, 46, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 5rem 2rem 2rem;
+        gap: 0;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Estado visible del menú (cuando JS añade .show) */
+    .header-links.show {
+        right: 0;
+    }
+
+    /* Separadores entre los enlaces */
+    .header-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-links li a {
+        display: block;
+        padding: 1rem 0;
+        width: 100%;
+    }
+
+    /* Último elemento del menú (solo en vista móvil) */
+    .header-links li:last-child {
+        /* Quitamos la línea inferior del último enlace
+            para que no quede un borde extra al final del menú */
+        border-bottom: none;
+    }
+
+    /* Ajuste de los márgenes del contenedor principal */
+    .contenedor-preguntas {
+        padding: 1rem;
+        margin-top: 120px;
+    }
+
+    .lapregunta-card h2 {
+        font-size: 1.1rem;
+        padding: 1rem;
+    }
+
+    .larespuesta-card.active {
+        padding: 1rem;
+    }
+}
+
+/* Ajustes adicionales para pantallas pequeñas (móviles pequeños) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    /* Forzamos estas dimensiones para el logo en móviles, asegurando que no se sobrescriban por otros estilos externos */
+    .logo img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .contenedor-preguntas {
+        margin: 50px auto;
+        gap: 1rem;
+    }
+}

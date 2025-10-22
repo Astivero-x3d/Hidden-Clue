@@ -1,0 +1,433 @@
+/* Reset general: elimina márgenes, paddings y asegura que
+   el tamaño de los elementos se calcule con border-box */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables CSS (colores y gradientes reutilizables) */
+:root {
+    --primary-color: #1a1a2e;       /* Color principal, usado en el fondo del footer */
+    --secondary-color: #27ae60;    /* Color secundario, usado en títulos y acentos */
+    --accent-color: #e74c3c;       /* Color de acento, para resaltar elementos */
+    --text-light: #ecf0f1;         /* Texto claro, para fondos oscuros */
+    --text-dark: #2c3e50;          /* Texto oscuro, por si se necesita contraste */
+    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Estilos generales del body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f0f; /* Fondo oscuro */
+    color: var(--text-light); /* Texto en color claro */
+    overflow-x: hidden; /* Evita scroll horizontal */
+    line-height: 1.6;
+}
+
+/* Prevenir scroll cuando el menú está abierto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* --------------------- */
+/*      NAVEGACIÓN       */
+/* --------------------- */
+
+/* Estilos del header fijo */
+header {
+    background: rgba(26, 26, 46, 0.95); /* Fondo semitransparente */
+    backdrop-filter: blur(10px); /* Difuminado tipo cristal */
+    padding: 1rem 5%; /* Espaciado interno */
+    position: fixed;  /* Se queda fijo arriba */
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Siempre por encima */
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3); /* Sombra inferior */
+}
+
+/* Estilos generales */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo del logo */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-decoration: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+}
+
+/* Links en escritorio */
+.header-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
+}
+
+.header-links li a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease; /* asegura espacio arriba/abajo */
+}
+
+/* Botón hamburguesa (oculto en escritorio) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    background: none;
+    border: none;
+    padding: 0.5rem; /* ajusta al color de tu header */
+}
+
+.header-links li a:hover {
+    color: var(--secondary-color);
+}
+
+/* Línea animada bajo los enlaces */
+.header-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+/* Al pasar el mouse, la línea se expande */
+.header-links li a:hover::after,
+.header-links li a.active::after {
+  width: 100%; /* subrayado completo al pasar o activo */
+}
+
+/* Efecto hover en enlaces */
+.header-links a:hover {
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* --------------------- */
+/*     HERO SECTION      */
+/* --------------------- */
+
+.hero {
+    /* Ocupa toda la pantalla */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+     /* Fondo degradado + imagen SVG */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><rect fill="%23111" width="1920" height="1080"/><g opacity="0.1"><path fill="%23fff" d="M0 0h960v540H0z"/><path fill="%23000" d="M960 0h960v540H960z"/><path fill="%23fff" d="M0 540h960v540H0z"/><path fill="%23000" d="M960 540h960v540H960z"/></g></svg>');
+    background-size: cover;
+    background-position: center;
+    /* Para que no tape el header fijo */
+    margin-top: 60px; 
+}
+
+/* Contenido dentro del hero */
+.hero-content {
+    text-align: center;
+    z-index: 1; /* Por encima de las partículas */
+    animation: fadeInUp 1s ease; /* Animación de entrada */
+}
+
+/* Nombre de la empresa */
+.company-name {
+    font-size: 6rem;
+    font-weight: bold;
+    /* Texto con degradado */
+    background: linear-gradient(45deg, #27ae60, #e74c3c, #9b59b6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Truco para mostrar degradado en texto */
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(39, 174, 96, 0.3);
+    animation: glow 2s ease-in-out infinite alternate; /* Efecto de resplandor */
+}
+
+/* Animación glow */
+@keyframes glow {
+    from { filter: drop-shadow(0 0 20px rgba(243, 156, 18, 0.5)); }
+    to { filter: drop-shadow(0 0 30px rgba(231, 76, 60, 0.7)); }
+}
+
+/* Eslogan */
+.slogan {
+    font-size: 1.8rem;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Botón de llamada a la acción */
+.cta-button {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);
+    position: relative;
+    overflow: hidden; /* Oculta el brillo animado */
+}
+
+/* Efecto de brillo en el botón */
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Comienza fuera */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+/* Al pasar el mouse el brillo se mueve */
+.cta-button:hover::before {
+    left: 100%;
+}
+
+/* Efecto hover del botón */
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(39, 174, 96, 0.4);
+}
+
+/* --------------------- */
+/*   FEATURES SECTION    */
+/* --------------------- */
+
+.features {
+    padding: 5rem 5%;
+    background: linear-gradient(180deg, #0f0f0f, #1a1a2e);
+}
+
+/* Contenedor con grid responsivo */
+.features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+}
+
+/* Tarjeta de cada característica */
+.feature-card {
+    background: rgba(255,255,255,0.05);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px); /* Efecto de vidrio */
+}
+
+/* Hover en tarjetas */
+.feature-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 20px 40px rgba(39, 174, 96, 0.2);
+    border-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+/* Icono de la característica */
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* Título de la característica */
+.feature-title {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+/* Descripción */
+.feature-description {
+    color: #bdc3c7;
+    line-height: 1.6;
+}
+
+/* --------------------- */
+/*     ANIMACIONES       */
+/* --------------------- */
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contenedor de partículas */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* No bloquea clics */
+}
+
+/* Cada partícula */
+.particle {
+    position: absolute;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 20s infinite linear;
+}
+
+/* Movimiento flotante */
+@keyframes float {
+    from {
+        transform: translateY(100vh) translateX(0);
+    }
+    to {
+        transform: translateY(-100px) translateX(100px);
+    }
+}
+
+/* --------------------- */
+/*        FOOTER         */
+/* --------------------- */
+
+footer {
+    background: var(--primary-color);
+    padding: 3rem 5%;
+    text-align: center;
+    border-top: 2px solid var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    border-left: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+.footer-links {
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: #eee;
+    text-decoration: none;
+    margin: 0 0.8rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--secondary-color); /* Color secundario en hover */
+}
+
+.footer-quote {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+
+/* --------------------- */
+/*      RESPONSIVE       */
+/* --------------------- */
+
+/* Mejoras para el menú en móviles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        z-index: 1000;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .header-links {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        height: 100vh;
+        width: 250px;
+        background: rgba(26, 26, 46, 0.98);
+        flex-direction: column;
+        padding: 5rem 1rem 1rem;
+        gap: 1.5rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        margin: 0;
+    }
+
+    .header-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-links li a {
+        display: block;
+        padding: 0.8rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cuando se activa el menú */
+    .header-links.show {
+        right: 0;
+    }
+    
+    /* Ajustar el hero para móviles */
+    .hero {
+        margin-top: 80px;
+        height: calc(100vh - 80px);
+    }
+    
+    .company-name {
+        font-size: 3rem;
+    }
+    
+    .slogan {
+        font-size: 1.2rem;
+    }
+    
+    .features-container {
+        grid-template-columns: 1fr;
+    }
+}

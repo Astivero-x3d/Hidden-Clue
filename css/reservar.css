@@ -1,0 +1,470 @@
+/* ============================= */
+/*      RESET GENERAL            */
+/* ============================= */
+/* Reset general: elimina márgenes, paddings y asegura que
+   el tamaño de los elementos se calcule con border-box */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================= */
+/*      VARIABLES CSS            */
+/* ============================= */
+/* Variables CSS (colores y gradientes reutilizables) */
+:root {
+    --primary-color: #1a1a2e;       /* Color principal, usado en el fondo del footer */
+    --secondary-color: #27ae60;    /* Color secundario, usado en títulos y acentos */
+    --accent-color: #e74c3c;       /* Color de acento, para resaltar elementos */
+    --text-light: #ecf0f1;         /* Texto claro, para fondos oscuros */
+    --text-dark: #2c3e50;          /* Texto oscuro, por si se necesita contraste */
+    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente reutilizable */ 
+}
+
+/* ============================= */
+/*      BODY GENERAL             */
+/* ============================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f0f; /* Fondo oscuro */
+    color: var(--text-light); /* Texto en color claro */
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* ============================= */
+/*      PARTÍCULAS ANIMADAS      */
+/* ============================= */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Detrás de todo */
+    pointer-events: none; /* No bloquea clics */
+}
+
+/* Partículas individuales */
+.particle {
+    position: absolute;
+    background-color: rgba(39, 174, 96, 0.5); /* Color semitransparente */
+    border-radius: 50%; /* Forma circular */
+    animation: float 30s infinite linear; /* Animación continua */
+}
+
+/* Animación de flotación para partículas */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Prevenir scroll cuando el menú está abierto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* --------------------- */
+/*      NAVEGACIÓN       */
+/* --------------------- */
+
+header {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px); /* Efecto blur detrás */
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-decoration: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+}
+
+/* Navegación desktop */
+.header-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
+}
+
+.header-links li a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.header-links li a:hover {
+    color: var(--secondary-color);
+}
+
+/* Línea animada bajo los enlaces */
+.header-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.header-links li a:hover::after,
+.header-links li a.active::after {
+    width: 100%;
+}
+
+/* Botón hamburguesa (oculto en escritorio) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+/* --------------------- */
+/*      FORMULARIO      */
+/* --------------------- */
+.reservar-form {
+    max-width: 600px;
+    margin: 200px auto 50px; /* Margen superior para no chocar con header */
+    padding: 2rem;
+    background: rgba(26, 26, 46, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(39, 174, 96, 0.2);
+    border: 1px solid var(--secondary-color);
+}
+
+.reservar-form h2 {
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.reservar-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.reservar-form .form-label {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+/* Inputs y textarea */
+.reservar-form .form-input,
+.reservar-form .form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.10);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+}
+
+.reservar-form .form-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.25);
+}
+
+.reservar-form .form-select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.10);
+}
+
+/* Estilo para las opciones */
+.reservar-form .form-select option {
+    background: #1a1a2e;
+    color: #ecf0f1;
+    padding: 10px;
+}
+
+/* Para cuando el select está abierto */
+.reservar-form .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Estilo para las opciones cuando se despliegan */
+.reservar-form .form-select option:checked,
+.reservar-form .form-select option:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.reservar-form input:focus,
+.reservar-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
+}
+
+.reservar-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Botones */
+.reservar-form button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.reservar-form button:hover {
+    background: #219a52;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.reservar-form button:active {
+    transform: translateY(0);
+}
+
+/* Añadir un estilo para campos inválidos */
+.reservar-form input:invalid,
+.reservar-form textarea:invalid {
+    border-color: var(--accent-color);
+}
+
+/* ============================= */
+/*      SELECT HORAS             */
+/* ============================= */
+
+#horas-visual-list div {
+    transition: all 0.3s ease;
+}
+
+#horas-visual-list div:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Estilos para el select de horas */
+#hora_reserva option:disabled {
+    background-color: #ffcccc;
+    color: #666;
+}
+
+#hora_reserva option:not(:disabled) {
+    background-color: #ccffcc;
+}
+
+.no-dropdown {
+    -webkit-appearance: none; /* Quita el estilo predeterminado de los navegadores Webkit (Chrome, Safari) */
+    -moz-appearance: none; /* Quita el estilo predeterminado de los navegadores Firefox */
+    appearance: none; /* Quita el estilo predeterminado del elemento (general) */
+    pointer-events: none; /* Desactiva cualquier interacción del usuario: no se puede hacer clic ni abrir el dropdown */
+    background-color: #f8f9fa; /* Fondo gris claro para indicar que está deshabilitado */
+}
+
+/* Cuando el elemento se enfoca */
+.no-dropdown:focus {
+    outline: none; /* Quita el borde de foco predeterminado */
+    box-shadow: none; /* Quita cualquier sombra de foco */
+}
+
+
+/* ============================= */
+/*    BOTONES CONFIRMAR/CANCELAR */
+/* ============================= */
+
+.btn-confirmar, .btn-cancelar {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-confirmar {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-confirmar:hover {
+    background-color: #218838;
+}
+
+.btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+    text-align: center;
+}
+
+.btn-cancelar:hover {
+    background-color: #545b62;
+}
+
+h3{
+    color: #218838;
+}
+
+/* --------------------- */
+/*        FOOTER         */
+/* --------------------- */
+
+footer {
+    background: var(--primary-color);
+    padding: 3rem 5%;
+    text-align: center;
+    border-top: 2px solid var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    border-left: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+.footer-links {
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: #eee;
+    text-decoration: none;
+    margin: 0 0.8rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--secondary-color); /* Color secundario en hover */
+}
+
+.footer-quote {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* --------------------- */
+/*      RESPONSIVE       */
+/* --------------------- */
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        z-index: 1000;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .header-links {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        background: rgba(26, 26, 46, 0.98);
+        flex-direction: column;
+        padding: 5rem 1rem 1rem;
+        gap: 1.5rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        margin: 0;
+    }
+
+    .header-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-links li a {
+        display: block;
+        padding: 0.8rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cuando se activa el menú */
+    .header-links.show {
+        right: 0;
+    }
+
+    /* Ajustar el formulario para móviles */
+    .reservar-form {
+        margin: 150px auto 50px;
+        padding: 1.5rem;
+    }
+}

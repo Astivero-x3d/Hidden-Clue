@@ -1,0 +1,383 @@
+/* 
+=========================================================
+ARCHIVO: contacto.css
+DESCRIPCIÓN: Estilos para la página de contacto de HiddenClue.
+SECCIONES:
+1. Reset y variables
+2. Body y fondo animado
+3. Navegación (header)
+4. Formulario de contacto
+5. Mensajes de validación y éxito
+6. Footer
+7. Responsive
+========================================================= 
+*/
+
+
+/* --------------------- */
+/* 1. RESET Y VARIABLES  */
+/* --------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Tamaño de elementos incluye borde y padding */
+}
+
+/* Variables CSS (colores y gradientes reutilizables) */
+:root {
+    --primary-color: #1a1a2e; /* Color principal para fondos oscuros */
+    --secondary-color: #27ae60; /* Color secundario para acentos */
+    --accent-color: #e74c3c; /* Color de acento para errores */
+    --text-light: #ecf0f1; /* Texto claro sobre fondos oscuros */
+    --text-dark: #2c3e50; /* Texto oscuro si se necesita contraste */
+    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Gradiente lineal reutilizable */
+}
+
+/* -------------------------*/
+/* 2. BODY Y FONDO ANIMADO  */
+/* -------------------------*/
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f0f; /* Fondo oscuro */
+    color: var(--text-light);
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Contenedor de partículas */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none; /* Las partículas no interfieren con clics ni enlaces */
+}
+
+/* Partículas individuales generadas por JS */
+.particle {
+    position: absolute;
+    background-color: rgba(39, 174, 96, 0.5);
+    border-radius: 50%;
+    animation: float 30s infinite linear; /* Animación de flotación constante */
+}
+
+/* Animación de flotación para partículas */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0); /* Partícula en posición inicial */
+        opacity: 0; /* Comienza invisible */
+    }
+    10% {
+        opacity: 1; /* Aparece gradualmente */
+    }
+    90% {
+        opacity: 1; /* Mantiene visibilidad */
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px); /* Se mueve hacia arriba y a la derecha */
+        opacity: 0; /* Desaparece al final */
+    }
+}
+
+/* Prevenir scroll cuando el menú está abierto */
+body.no-scroll {
+    overflow: hidden; /* Evita que la página haga scroll. Se usa cuando el menú móvil está abierto */
+}
+
+/* --------------------- */
+/*      NAVEGACIÓN       */
+/* --------------------- */
+
+header {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px); /* Desenfoque del fondo para efecto glassmorphism */
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+/* Estilos generales */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo del logo */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-decoration: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+}
+
+/* Links en escritorio */
+.header-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
+}
+
+.header-links li a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease; /* Transición suave para hover */
+}
+
+/* Línea animada bajo los enlaces usando pseudo-elemento ::after */
+.header-links li a::after {
+    content: ""; /* Genera un pseudo-elemento vacío */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease; /* Animación de expansión */
+}
+
+/* Expande la línea al pasar el mouse o si el enlace está activo */
+.header-links li a:hover::after,
+.header-links li a.active::after {
+    width: 100%;
+}
+
+/* Efecto hover en enlaces */
+.header-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* Botón hamburguesa (oculto en escritorio) */
+.menu-toggle {
+    display: none; /* Oculto en escritorio */
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    background: none;
+    border: none;
+    padding: 0.5rem; /* ajusta al color de tu header */
+}
+
+/* ----------------------- */
+/*  FORMULARIO DE CONTACTO */
+/* ----------------------- */
+
+.contact-form {
+    max-width: 600px;
+    margin: 200px auto 50px;
+    padding: 2rem;
+    background: rgba(26, 26, 46, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(39, 174, 96, 0.2);
+    border: 1px solid var(--secondary-color);
+}
+
+.contact-form h2 {
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-form label {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease; /* Suaviza cambios de color, sombra, etc. */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
+}
+
+.contact-form textarea {
+    min-height: 150px;
+    resize: vertical; /* Permite cambiar tamaño verticalmente */
+}
+
+.contact-form button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;  /* Hace que cualquier cambio visual (color, sombra, transform) sea suave en 0.3s */
+    margin-top: 1rem;
+    text-transform: uppercase; /* Convierte texto a mayúsculas */
+    letter-spacing: 1px;
+}
+
+.contact-form button:hover {
+    background: #219a52;
+    transform: translateY(-2px); /* Eleva el botón al pasar el mouse */
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.contact-form button:active {
+    transform: translateY(0); /* Vuelve a la posición original al hacer clic */
+}
+
+/* Estilo para campos inválidos */
+.contact-form input:invalid,
+.contact-form textarea:invalid {
+    border-color: var(--accent-color); /* Resalta en rojo los campos que no cumplen validación */
+}
+
+/* ---------------------- */
+/*    MENSAJES DEL FORM   */
+/* ---------------------- */
+
+/* Mensajes de éxito y error del formulario */
+.alert {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.alert-success {
+    background-color: rgba(39, 174, 96, 0.2);
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.error {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+
+/* --------------------- */
+/*        FOOTER         */
+/* --------------------- */
+
+footer {
+    background: var(--primary-color);
+    padding: 3rem 5%;
+    text-align: center;
+    border: 2px solid var(--secondary-color);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+.footer-links {
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: #eee;
+    text-decoration: none;
+    margin: 0 0.8rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-quote {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* --------------------- */
+/*      RESPONSIVE       */
+/* --------------------- */
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        z-index: 1000;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .header-links {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        background: rgba(26, 26, 46, 0.98);
+        flex-direction: column;
+        padding: 5rem 1rem 1rem;
+        gap: 1.5rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        margin: 0;
+    }
+
+    .header-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-links li a {
+        display: block;
+        padding: 0.8rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cuando se activa el menú */
+    .header-links.show {
+        right: 0;
+    }
+
+    .contact-form {
+        margin: 150px auto 50px;
+        padding: 1.5rem;
+    }
+}

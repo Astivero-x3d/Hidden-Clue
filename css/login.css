@@ -1,0 +1,425 @@
+/* Reset general: margenes y paddings a 0, border-box para todo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables de colores para consistencia en toda la web */
+:root {
+    --primary-color: #1a1a2e;       /* Color principal, usado en el fondo del footer */
+    --secondary-color: #27ae60;    /* Color secundario, usado en títulos y acentos */
+    --accent-color: #e74c3c;       /* Color de acento, para resaltar elementos */
+    --text-light: #ecf0f1;         /* Texto claro, para fondos oscuros */
+    --text-dark: #2c3e50;          /* Texto oscuro, por si se necesita contraste */
+    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Body principal */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f0f0f; /* Fondo oscuro */
+    color: var(--text-light); /* Texto en color claro */
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Contenedor para partículas animadas */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Partículas individuales */
+.particle {
+    position: absolute;
+    background-color: rgba(39, 174, 96, 0.5);
+    border-radius: 50%;
+    animation: float 30s infinite linear;
+}
+
+/* Animación de las partículas */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px);
+        opacity: 0;
+    }
+}
+
+/* Prevenir scroll cuando el menú está abierto */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* --------------------- */
+/*      NAVEGACIÓN       */
+/* --------------------- */
+
+/* Estilos de fondo, blur, padding, posición fija */
+header {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+/* Flexbox, espacio entre elementos */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Fuente, color, shadow, flex align */
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-decoration: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+}
+
+/* Flex, gap, estilo de enlaces */
+.header-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    align-items: center;
+}
+
+.header-links li a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.header-links li a:hover {
+    color: var(--secondary-color);
+}
+
+/* Línea animada bajo enlaces */
+.header-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.header-links li a:hover::after,
+.header-links li a.active::after {
+    width: 100%;
+}
+
+/* Botón hamburguesa (oculto en escritorio) */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+}
+
+/* ----------------------------- */
+/*      FORMULARIO DE LOGIN      */
+/* ----------------------------- */
+
+/* Centrado, fondo, border-radius, box-shadow */
+.login-form {
+    max-width: 600px;
+    margin: 200px auto;
+    padding: 2rem;
+    background: rgba(26, 26, 46, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(39, 174, 96, 0.2);
+    border: 1px solid var(--secondary-color);
+}
+
+/* Color, centrado, tamaño */
+.login-form h2 {
+    color: var(--secondary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.login-form label {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+/* Estilos campos */
+.login-form input,
+.login-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.login-form input:focus,
+.login-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
+}
+
+.login-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Estilo del botón con hover y active */
+.login-form button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-form button:hover {
+    background: #219a52;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.login-form button:active {
+    transform: translateY(0);
+}
+
+/* Añadir un estilo para campos inválidos */
+.login-form input:invalid,
+.login-form textarea:invalid {
+    border-color: var(--accent-color);
+}
+
+/* --------------------- */
+/*   ELEMENTOS AÑADIDOS  */
+/* --------------------- */
+
+/* Mensajes de error */
+.error {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 4px;
+    display: none;
+}
+
+.error.show {
+    display: block;
+}
+
+/* Enlace a registro */
+.registro-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.registro-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.registro-link a:hover {
+    color: #219a52;
+    text-decoration: underline;
+}
+
+/* --------------------- */
+/*        FOOTER         */
+/* --------------------- */
+
+/* Fondo, padding, bordes, texto centrado */
+footer {
+    background: var(--primary-color);
+    padding: 3rem 5%;
+    text-align: center;
+    border-top: 2px solid var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    border-left: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+.footer-links {
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: #eee;
+    text-decoration: none;
+    margin: 0 0.8rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--secondary-color); /* Color secundario en hover */
+}
+
+.footer-quote {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* --------------------- */
+/*      RESPONSIVE       */
+/* --------------------- */
+
+/* Ajustes para móviles: menú hamburguesa, formulario más pequeño */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        z-index: 1000;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    .header-links {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        background: rgba(26, 26, 46, 0.98);
+        flex-direction: column;
+        padding: 5rem 1rem 1rem;
+        gap: 1.5rem;
+        transition: right 0.3s ease;
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        margin: 0;
+    }
+
+    .header-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .header-links li a {
+        display: block;
+        padding: 0.8rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Cuando se activa el menú */
+    .header-links.show {
+        right: 0;
+    }
+    
+    /* Ajustar el formulario para móviles */
+    .login-form {
+        margin: 150px auto;
+        padding: 1.5rem;
+    }
+}
+
+/* Mensajes de alerta (éxito/error) */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert.alert-error {
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.alert.alert-success {
+    background: rgba(39, 174, 96, 0.2);
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.error {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 4px;
+    display: none;
+}
+
+.error.show {
+    display: block;
+}
