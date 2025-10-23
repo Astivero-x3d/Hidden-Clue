@@ -1,6 +1,6 @@
 # Hidden Clue
 
-**Proyecto web de reservas de salas de scape room**
+**Proyecto web de reservas de salas de escape room**
 
 Hidden Clue es una pagina web que permite a los usuarios reservar salas.  
 
