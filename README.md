@@ -68,4 +68,4 @@ Hidden Clue es una pagina web que permite a los usuarios reservar salas.
 Ismael Astillero García Muñoz
 
 ### Enlace
-Enlace -> [Hidden Clue](hiddenclue.org)
+Enlace -> [Hidden Clue](https://hiddenclue.org)
